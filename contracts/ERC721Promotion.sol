@@ -6,21 +6,21 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ERC721Promotion is ERC721, Ownable {
     constructor(string memory _name, string memory _symbol) ERC721(_name, _symbol) {}
-    
+
     address private to;
 
     function getTo() view public returns (address){
         return to;
     }
-    
+
     function setTo(address _to) external onlyOwner {
         to = _to;
     }
-    
+
     function mint(uint256 tokenId) external onlyOwner {
         _mint(to, tokenId);
     }
-    
+
     function burn(uint256 tokenId) external onlyOwner {
         _burn(tokenId);
     }
