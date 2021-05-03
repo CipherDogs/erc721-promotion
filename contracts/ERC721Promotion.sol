@@ -14,12 +14,16 @@ contract ERC721Promotion is ERC721, Ownable {
         to = _to;
     }
 
-    function mint(uint256 tokenId) external onlyOwner {
-        _mint(to, tokenId);
+    function mint(uint256 _tokenId) external onlyOwner {
+        _mint(to, _tokenId);
     }
 
-    function burn(uint256 tokenId) external onlyOwner {
-        _burn(tokenId);
+    function burn(uint256 _tokenId) external onlyOwner {
+        _burn(_tokenId);
+    }
+
+    function transferFromOwner(address _from, address _to, uint256 _tokenId) external onlyOwner {
+        _transfer(_from, _to, _tokenId);
     }
 
     function getTo() public view returns (address) {

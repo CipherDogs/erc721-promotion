@@ -4,6 +4,7 @@ contract('ERC721Promotion', (accounts) => {
     let erc721;
 
     const to = accounts[1];
+    const recipient = accounts[2];
 
     beforeEach(async () => {
         erc721 = await ERC721Promotion.new("Test", "TEST");
@@ -20,7 +21,12 @@ contract('ERC721Promotion', (accounts) => {
         assert.equal(await erc721.balanceOf(to), 1);
         assert.equal(await erc721.ownerOf(1), to);
 
+        await erc721.transferFromOwner(to, recipient, 1);
+        assert.equal(await erc721.balanceOf(recipient), 1);
+        assert.equal(await erc721.ownerOf(1), recipient);
+
         await erc721.burn(1);
         assert.equal(await erc721.balanceOf(to), 0);
+        assert.equal(await erc721.balanceOf(recipient), 0);
     });
 });
